@@ -6,20 +6,12 @@ const FACEBOOK_TOKENS = {
  FACEBOOK_TOKEN_SECRET: "SOME TOKEN SECRET"
 };
 
-const DB_USER = "hemant19";
-const DB_PASSWORD = "temp@password19";
-const MONGODB = {
-  MONGODB_URI: `mongodb://hemant19:${encodeURIComponent('temp@password19')}@ds141208.mlab.com:41208/demo-contact-db`
-};
-
-
 const SESSION = {
   COOKIE_KEY: "thisappisawesome"
 };
 
 const KEYS = {
   ...FACEBOOK_TOKENS,
-  ...MONGODB,
   ...SESSION
 };
 

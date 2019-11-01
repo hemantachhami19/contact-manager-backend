@@ -42,7 +42,7 @@ router.get('/facebook/callback',
       successRedirect: CLIENT_HOME_PAGE_URL,
     }),
     function(req, res) {
-      
+
       // Successful authentication, redirect home.
       //res.redirect('/test');
     });
