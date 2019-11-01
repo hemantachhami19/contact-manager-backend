@@ -6,8 +6,16 @@ module.exports = (sequelize, DataTypes) => {
     email: DataTypes.STRING,
     phoneNumber: DataTypes.STRING
   }, {});
+
   Contact.associate = function(models) {
-    // associations can be defined here
+    Contact.belongsTo(models.User, {
+      foreignKey: 'userId',
+      as: 'user'
+    });
   };
   return Contact;
 };
+
+
+
+

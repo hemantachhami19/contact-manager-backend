@@ -7,7 +7,10 @@ module.exports = (sequelize, DataTypes) => {
     facebookId: DataTypes.STRING
   }, {});
   User.associate = function(models) {
-    // associations can be defined here
-  };
+    User.hasMany(models.Contact, {
+      foreignKey: 'userId',
+      as: 'contacts'
+    });
+  };;
   return User;
 };
