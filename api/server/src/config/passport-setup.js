@@ -28,16 +28,15 @@ passport.use(
     {
       clientID: keys.FACEBOOK_CONSUMER_KEY,
       clientSecret: keys.FACEBOOK_CONSUMER_SECRET,
-      callbackURL: "/auth/facebook/callback"
+      callbackURL: "http://localhost:8000/api/v1/auth/facebook/callback"
     },
     async (token, tokenSecret, profile, done) => {
-      console.log("profile ==========",profile);
-      // // find current user in UserModel
-      console.log("id =========",profile.id_str)
+
         const currentUser = await database.User.findOne({
-            where: { id: Number(profile.id) }
+            where: { facebookId: profile.id }
         })
-      console.log("cu==========================",currentUser);
+
+
       // create new user if the database doesn't have this user
       if (!currentUser) {
           const newUser = await database.User.create(
@@ -50,7 +49,7 @@ passport.use(
           done(null, newUser);
         }
       }
-       done(null, currentUser);
+      done(null, currentUser);
     }
   )
 );

@@ -52,7 +52,7 @@ app.use(passport.session());
 
 
 // set up routes
-app.use('/auth', authRoutes);
+app.use('/api/v1/auth', authRoutes);
 
 const authCheck = (req, res, next) => {
     if (!req.user) {
