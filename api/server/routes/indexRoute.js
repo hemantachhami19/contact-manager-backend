@@ -1,12 +1,23 @@
 import express from 'express';
 import contactRoutes from "./ContactRoute";
-import authRoutes from "./auth-routes";
 const router = express.Router();
-const app = express();
-
-app.use('/contacts', contactRoutes);
+const authRoutes = require("./authRoutes");
+const authCheck = require('../middleware/authCheck');
 
 // set up routes
-app.use('/auth', authRoutes);
+router.use('/auth', authRoutes);
+router.use('/contacts', contactRoutes);
+
+// if it's already login, send the profile response,
+// otherwise, send a 401 response that the user is not authenticated
+// authCheck before navigating to home page
+router.get("/", authCheck, (req, res) => {
+  res.status(200).json({
+    authenticated: true,
+    message: "user successfully authenticated",
+    user: req.user,
+    cookies: req.cookies
+  });
+});
 
 export default router;
