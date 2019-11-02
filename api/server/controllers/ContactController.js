@@ -1,9 +1,7 @@
 import ContactService from '../services/ContactService';
 import Util from '../utils/Utils';
 import database from "../src/models";
-
 const util = new Util();
-
 class ContactController {
     static async getAllContacts(req, res) {
         try {

@@ -1,9 +1,7 @@
 import database from "../models";
-
 const passport = require("passport");
 const FacebookStrategy = require("passport-facebook");
 const keys = require("./keys");
-const User = require("../models/user");
 
 // serialize the user.id to save in the cookie session
 // so the browser will remember the user when login

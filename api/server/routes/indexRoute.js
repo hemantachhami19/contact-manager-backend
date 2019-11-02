@@ -1,5 +1,5 @@
 import express from 'express';
-import contactRoutes from "./ContactRoute";
+import contactRoutes from "./contactRoute";
 const router = express.Router();
 const authRoutes = require("./authRoutes");
 const authCheck = require('../middleware/authCheck');
