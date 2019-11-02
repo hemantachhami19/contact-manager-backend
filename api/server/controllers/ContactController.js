@@ -1,5 +1,6 @@
 import ContactService from '../services/ContactService';
 import Util from '../utils/Utils';
+import database from "../src/models";
 
 const util = new Util();
 
@@ -10,7 +11,7 @@ class ContactController {
             if (allContacts.length > 0) {
                 util.setSuccess(200, 'Contacts retrieved', allContacts);
             } else {
-                util.setSuccess(200, 'No contact found');
+                util.setSuccess(200, 'No contact found',[]);
             }
             return util.send(res);
         } catch (error) {
@@ -24,8 +25,17 @@ class ContactController {
             util.setError(400, 'Please provide complete details');
             return util.send(res);
         }
+
         const newContact = req.body;
         try {
+            const theContact = await database.Contact.findOne({
+                where: { phoneNumber: newContact.phoneNumber }
+            });
+            if(theContact){
+                util.setError(400, 'Cannot add same phone Number twice');
+                return util.send(res);
+            }
+
             const createdContact = await ContactService.addContact(newContact);
             util.setSuccess(201, 'Contact Added!', createdContact);
             return util.send(res);
