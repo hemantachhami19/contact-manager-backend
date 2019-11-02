@@ -7,7 +7,7 @@ module.exports = (sequelize, DataTypes) => {
     phoneNumber: DataTypes.STRING
   }, {});
 
-  Contact.associate = function(models) {
+  Contact.associate = function (models) {
     Contact.belongsTo(models.User, {
       foreignKey: 'userId',
       as: 'user'

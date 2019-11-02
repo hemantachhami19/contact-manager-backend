@@ -6,11 +6,11 @@ module.exports = (sequelize, DataTypes) => {
     email: DataTypes.STRING,
     facebookId: DataTypes.STRING
   }, {});
-  User.associate = function(models) {
+  User.associate = function (models) {
     User.hasMany(models.Contact, {
       foreignKey: 'userId',
       as: 'contacts'
     });
-  };;
+  };
   return User;
 };
