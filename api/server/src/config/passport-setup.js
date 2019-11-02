@@ -13,9 +13,8 @@ passport.serializeUser((user, done) => {
 
 // deserialize the cookieUserId to user in the database
 passport.deserializeUser((id, done) => {
-     database.User.findByPk(id)
+  database.User.findByPk(id)
     .then(user => {
-        console.log(user);
       done(null, user);
     })
     .catch(e => {
@@ -32,18 +31,18 @@ passport.use(
     },
     async (token, tokenSecret, profile, done) => {
 
-        const currentUser = await database.User.findOne({
-            where: { facebookId: profile.id }
-        })
+      const currentUser = await database.User.findOne({
+        where: {facebookId: profile.id}
+      });
 
 
       // create new user if the database doesn't have this user
       if (!currentUser) {
-          const newUser = await database.User.create(
-            {
-                name: profile.name,
-                facebookId: profile.id,
-            }
+        const newUser = await database.User.create(
+          {
+            name: profile.name,
+            facebookId: profile.id,
+          }
         );
         if (newUser) {
           done(null, newUser);
