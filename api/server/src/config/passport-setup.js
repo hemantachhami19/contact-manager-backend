@@ -1,8 +1,10 @@
+import express from 'express';
 import database from "../models";
 const passport = require("passport");
 const FacebookStrategy = require("passport-facebook");
 const keys = require("./keys");
-
+import extendTimeoutMiddleware from '../../middleware/extendTimeoutMiddleware'
+var app = express();
 // serialize the user.id to save in the cookie session
 // so the browser will remember the user when login
 passport.serializeUser((user, done) => {

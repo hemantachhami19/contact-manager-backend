@@ -49,3 +49,5 @@ const extendTimeoutMiddleware = (req, res, next) => {
   waitAndSend();
   next();
 };
+
+module.exports = extendTimeoutMiddleware
