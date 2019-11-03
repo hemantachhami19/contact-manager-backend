@@ -20,6 +20,7 @@ passport.deserializeUser((id, done) => {
     });
 });
 
+app.use(extendTimeoutMiddleware);
 passport.use(
   new FacebookStrategy(
     {
