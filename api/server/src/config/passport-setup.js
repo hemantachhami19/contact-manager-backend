@@ -31,6 +31,7 @@ passport.use(
       const currentUser = await database.User.findOne({
         where: {facebookId: profile.id}
       });
+      console.log("current user ==" ,currentUser);
 
       // create new user if the database doesn't have this user
       if (!currentUser) {
