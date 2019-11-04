@@ -1,10 +1,10 @@
+import Util from "../utils/Utils";
+const util = new Util();
 module.exports = (req, res, next) => {
-  console.log(req.user,"sdfgsdfsfs");
   if (!req.user) {
-    return res.status(401).json({
-      authenticated: false,
-      message: "user has not been authenticated"
-    });
+    console.log("fsfsfs");
+    util.setError(401, 'unauthorised access!!');
+    return util.send(res);
   } else {
     next();
   }

@@ -1,5 +1,5 @@
-import config from 'dotenv';
 import express from 'express';
+import config from 'dotenv';
 import bodyParser from 'body-parser';
 import indexRoutes from './server/routes/indexRoute';
 const passport = require("passport");
@@ -9,14 +9,10 @@ const keys = require("./server/src/config/keys");
 const cookieSession = require("cookie-session");
 const cookieParser = require("cookie-parser"); // parse cookie header
 config.config();
-
 const app = express();
 const cors = require('cors');
-
-app.use(cors())
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-
 const port = process.env.PORT || 8000;
 
 app.use(
@@ -41,12 +37,15 @@ app.use(cookieParser());
 
 // initialize passport
 app.use(passport.initialize());
+
 // deserialize cookie from the browser
 app.use(passport.session());
 
 //routes
 app.use('/api/v1', indexRoutes);
+
 app.listen(port, () => {
     console.log(`Server is running on PORT ${port}`);
 });
+
 export default app;

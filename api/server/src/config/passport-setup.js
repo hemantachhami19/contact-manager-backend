@@ -1,10 +1,8 @@
-import express from 'express';
 import database from "../models";
 const passport = require("passport");
 const FacebookStrategy = require("passport-facebook");
 const keys = require("./keys");
 
-var app = express();
 // serialize the user.id to save in the cookie session
 // so the browser will remember the user when login
 passport.serializeUser((user, done) => {
@@ -35,9 +33,6 @@ passport.use(
       const currentUser = await database.User.findOne({
         where: {facebookId: profile.id}
       });
-
-      //console.log("current user ==" ,currentUser);
-
       // create new user if the database doesn't have this user
       if (!currentUser) {
         const newUser = await database.User.create(

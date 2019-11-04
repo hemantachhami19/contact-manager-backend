@@ -5,7 +5,7 @@ const FACEBOOK_TOKENS = {
 };
 
 const SESSION = {
-  COOKIE_KEY: "thisappisawesome"
+  COOKIE_KEY: "thisiscookiekey"
 };
 
 const KEYS = {

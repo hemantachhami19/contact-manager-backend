@@ -1,15 +1,14 @@
+/**
+ * extendTimeoutMiddleware:
+ * Sometimes facebook api callback  takes longer time to respond
+ * so, Heroku usually suffers request timeout error ie H12 error which is not configurable in heroku.
+ * To prevent request timeout error we call this middleware which makes server busy until the response comeback,
+ * This middleware is optional for local and aws environment where request timeout is configurable
+ */
 const extendTimeoutMiddleware = (req, res, next) => {
   const space = ' ';
   let isFinished = false;
   let isDataSent = false;
-
-  // Only extend the timeout for API requests
-  // if (!req.url.includes('/facebook/callback')) {
-  //   console.log("status ===",req.url.includes('/api'));
-  //   next();
-  //   return;
-  // }
-  console.log("extending timeout===");
 
   res.once('finish', () => {
     isFinished = true;
@@ -25,7 +24,6 @@ const extendTimeoutMiddleware = (req, res, next) => {
 
   res.on('data', (data) => {
     // Look for something other than our blank space to indicate that real
-    // data is now being sent back to the client.
     if (data !== space) {
       isDataSent = true;
     }
@@ -52,4 +50,4 @@ const extendTimeoutMiddleware = (req, res, next) => {
   next();
 };
 
-module.exports = extendTimeoutMiddleware
+module.exports = extendTimeoutMiddleware;
