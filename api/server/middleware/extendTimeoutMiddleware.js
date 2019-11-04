@@ -2,9 +2,10 @@ const extendTimeoutMiddleware = (req, res, next) => {
   const space = ' ';
   let isFinished = false;
   let isDataSent = false;
-  console.log("test =====");
+
   // Only extend the timeout for API requests
-  if (!req.url.includes('/api')) {
+  if (!req.url.includes('/facebook/callback')) {
+    console.log("status ===",req.url.includes('/api'));
     next();
     return;
   }
