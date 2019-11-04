@@ -5,14 +5,18 @@ const CLIENT_HOME_PAGE_URL = process.env.CLIENT_HOME_PAGE_URL || "http://localho
 import extendTimeoutMiddleware from '../middleware/extendTimeoutMiddleware'
 
 // when login is successful, retrieve user info
-router.get("/login/success", (req, res) => {
-  console.log(req.user);
+router.get("/login/success", extendTimeoutMiddleware,(req, res) => {
   if (req.user) {
     res.json({
       success: true,
       message: "user has successfully authenticated",
       user: req.user,
       cookies: req.cookies
+    });
+  }else{
+    res.json({
+      success: false,
+      message: "user not authenticated",
     });
   }
 

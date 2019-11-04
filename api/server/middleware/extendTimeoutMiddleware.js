@@ -9,7 +9,7 @@ const extendTimeoutMiddleware = (req, res, next) => {
   //   next();
   //   return;
   // }
-
+  console.log("extending timeout===");
 
   res.once('finish', () => {
     isFinished = true;

@@ -31,7 +31,7 @@ passport.use(
       callbackURL: keys.FACEBOOK_CALLBACK_URL
     },
     async (token, tokenSecret, profile, done) => {
-      console.log("facebooook");
+
       const currentUser = await database.User.findOne({
         where: {facebookId: profile.id}
       });
