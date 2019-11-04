@@ -2,8 +2,11 @@ const router = require("express").Router();
 const passport = require("passport");
 const CLIENT_HOME_PAGE_URL = process.env.CLIENT_HOME_PAGE_URL || "http://localhost:3000";
 
+import extendTimeoutMiddleware from '../middleware/extendTimeoutMiddleware'
+
 // when login is successful, retrieve user info
 router.get("/login/success", (req, res) => {
+  console.log(req.user);
   if (req.user) {
     res.json({
       success: true,
@@ -23,12 +26,15 @@ router.get("/logout", (req, res) => {
 
 // auth with facebook
 router.get("/facebook", passport.authenticate("facebook"));
+
 router.get('/facebook/callback',
-  passport.authenticate('facebook', {
+ extendTimeoutMiddleware, passport.authenticate('facebook', {
     failureRedirect: '/login',
     successRedirect: CLIENT_HOME_PAGE_URL,
   }),
   function (req, res) {
+    console.log("req url ==",req.url);
   });
+
 
 module.exports = router;

@@ -3,7 +3,7 @@ import database from "../models";
 const passport = require("passport");
 const FacebookStrategy = require("passport-facebook");
 const keys = require("./keys");
-import extendTimeoutMiddleware from '../../middleware/extendTimeoutMiddleware'
+
 var app = express();
 // serialize the user.id to save in the cookie session
 // so the browser will remember the user when login
@@ -22,7 +22,7 @@ passport.deserializeUser((id, done) => {
     });
 });
 
-app.use(extendTimeoutMiddleware);
+
 passport.use(
   new FacebookStrategy(
     {
@@ -31,10 +31,12 @@ passport.use(
       callbackURL: keys.FACEBOOK_CALLBACK_URL
     },
     async (token, tokenSecret, profile, done) => {
+      console.log("facebooook");
       const currentUser = await database.User.findOne({
         where: {facebookId: profile.id}
       });
-      console.log("current user ==" ,currentUser);
+
+      //console.log("current user ==" ,currentUser);
 
       // create new user if the database doesn't have this user
       if (!currentUser) {
