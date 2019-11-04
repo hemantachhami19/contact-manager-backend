@@ -28,13 +28,15 @@ app.use(
 );
 
 // set up cors to allow us to accept requests from our client
-app.use(
-  cors({
-    origin: process.env.CLIENT_HOME_PAGE_URL || "http://localhost:3000", // allow to server to accept request from different origin
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-    credentials: true // allow session cookie from browser to pass through
-  })
-);
+// app.use(
+//   cors({
+//     origin: process.env.CLIENT_HOME_PAGE_URL || "http://localhost:3000", // allow to server to accept request from different origin
+//     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+//     credentials: true // allow session cookie from browser to pass through
+//   })
+// );
+
+app.use(cors())
 
 // parse cookies
 app.use(cookieParser());
